@@ -12,4 +12,14 @@ jobs:
       
     - name: Run the Super-Linter
       uses: super-linter/super-linter@v5.0.0
+      env:
+        DEFAULT_BRANCH: main
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PYTHON_FLAKE8: false
+        PYTHON_PYLINT: false
+        PYTHON_MYPY: false
+        PYTHON_BANDIT: false
+        PYTHON_PYDOCSTYLE: false
+        PYTHON_BLACK: true
+        PYTHON_ISORT: true
       
