@@ -1,4 +1,4 @@
-name: Super-Linter
+name: Super-Linter & Automatic formatting
 
 on: push
 
@@ -22,4 +22,33 @@ jobs:
         PYTHON_PYDOCSTYLE: false
         PYTHON_BLACK: true
         PYTHON_ISORT: true
+        
+  format:
+    name: Apply code formatting
+    needs: super-lint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 'latest'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Run Black
+      run: black --check . || black .
+
+    - name: Run isort
+      run: isort --check . || isort .
+
+    - name: Commit and push changes
+      uses: stefanzweifel/git-auto-commit-action@v4
+      with:
+        commit_message: Apply code formatting
+        branch: ${{ github.head_ref }}
+        commit_options: '--no-verify'
       
