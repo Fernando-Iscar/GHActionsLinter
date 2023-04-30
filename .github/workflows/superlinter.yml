@@ -15,15 +15,16 @@ jobs:
       env:
         DEFAULT_BRANCH: main
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        PYTHON_FLAKE8: false
-        PYTHON_PYLINT: false
-        PYTHON_MYPY: false
-        PYTHON_BANDIT: false
-        PYTHON_PYDOCSTYLE: false
+        PYTHON_FLAKE8: true
+        PYTHON_PYLINT: true
+        PYTHON_MYPY: true
+        PYTHON_BANDIT: true
+        PYTHON_PYDOCSTYLE: true
         PYTHON_BLACK: true
         PYTHON_ISORT: true
         
   format:
+    if: ${{ needs.super-lint.result == 'failure' }} 
     name: Apply code formatting
     needs: super-lint
     runs-on: ubuntu-latest
