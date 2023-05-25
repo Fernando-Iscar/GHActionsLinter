@@ -12,6 +12,8 @@ In this project, the goal is to try GitHub Actions workflow with Super-Linter fo
 - Black
 - Isort
 
+These tools can be deactivated inside the pipeline if needed
+
 ## Auto-formatting
 
 If some errors are spotted using the Super-Linter, these will be corrected automatically 
